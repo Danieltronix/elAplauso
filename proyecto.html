@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Aplauso Cafeteria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #numero-container {
+            margin: 20px;
+            font-size: 24px;
+        }
+        #copiar-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>El Aplauso Cafeteria</h1>
+    <div id="numero-container">
+        <!-- Aquí se mostrará el número generado -->
+        <span id="numero-generado"></span>
+    </div>
+    <button id="copiar-btn">Copiar</button>
+
+    <script>
+        // Generar un número aleatorio de 16 dígitos
+        function generarNumero() {
+            const numero = 1234567891123456;
+            return numero.toString();
+        }
+
+        // Mostrar el número generado en la página
+        const numeroGeneradoElement = document.getElementById('numero-generado');
+        numeroGeneradoElement.textContent = generarNumero();
+
+        // Copiar el número al portapapeles al hacer clic en el botón
+        const copiarBtn = document.getElementById('copiar-btn');
+        copiarBtn.addEventListener('click', function() {
+            const numeroGenerado = numeroGeneradoElement.textContent;
+
+            // Crear un elemento de entrada de texto invisible
+            const input = document.createElement('input');
+            input.value = numeroGenerado;
+            document.body.appendChild(input);
+
+            // Seleccionar el contenido del campo de entrada de texto
+            input.select();
+            input.setSelectionRange(0, 99999);
+
+            // Copiar el contenido al portapapeles
+            document.execCommand('copy');
+
+            // Eliminar el campo de entrada de texto invisible
+            document.body.removeChild(input);
+
+            // Cambiar el texto del botón para indicar que se ha copiado
+            copiarBtn.textContent = 'Copiado!';
+        });
+    </script>
+</body>
+</html>
